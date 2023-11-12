@@ -19,13 +19,20 @@ function App() {
   const { url } = useSelector((state) => state.movie);
   //console.log(url);
   useEffect(function () {
-    apiTesting();
+    fetchApiConfig();
   }, []);
-  const apiTesting = () => {
-    fetchDataFromApi("/movie/popular").then((res) => {
-      //console.log(res);
+  //根據url連接configuration details
+  const fetchApiConfig = () => {
+    fetchDataFromApi("/configuration").then((res) => {
+      //console.log('img detail',res);
+      const url = {
+        backdrop: res.images.secure_base_url + "original",
+        poster: res.images.secure_base_url + "original",
+        profile: res.images.secure_base_url + "original",
+      };
+
       //在react中使用 useDispatch 來觸發 actions,actions 可以修改 Redux 存儲中的狀態
-      dispatch(getApiConfiguration(res));
+      dispatch(getApiConfiguration(url));
       //將res資料傳入redux store中
     });
   };
