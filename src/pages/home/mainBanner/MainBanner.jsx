@@ -41,13 +41,15 @@ function MainBanner() {
         </div>
       )}
 
+      <div className="opacity-layer"></div>
       <ContentWrapper>
         <div className="mainBannerContent">
           <span className="title">Welcome</span>
           <span className="subTitle">
-            Open a new me at any time. More than just classics, exciting new
-            releases
+            Open a new me at any time. <br />
+            More than just classics, exciting new releases
           </span>
+
           <div className="searchInput">
             <input
               onChange={(e) => setQuery(e.target.value)}
