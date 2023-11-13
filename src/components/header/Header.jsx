@@ -11,13 +11,19 @@ import { SlMenu } from "react-icons/sl";
 import { useState } from "react";
 
 function Header() {
+  const [mobileMenu, setMobileMenu] = useState(false);
+  const [showAll, setShowAll] = useState("");
   const [showSearch, setShowSearch] = useState(false);
 
   const handleOpenSearch = () => {
     setShowSearch(true);
   };
+
+  const handleOpemMobileMenu = () => {
+    setMobileMenu(true);
+  };
   return (
-    <header className="header">
+    <header className={`header ${mobileMenu ? "mobileView" : ""} ${showAll}`}>
       <ContentWrapper>
         <div className="navContainer">
           <div className="logo">
@@ -34,8 +40,8 @@ function Header() {
         {/* 手機版menu */}
         <div className="mobileMenuItems">
           <HiOutlineSearch />
-          <VscChromeClose />
-          <SlMenu />
+          <VscChromeClose onClick={() => setMobileMenu(false)} />
+          <SlMenu onClick={handleOpemMobileMenu} />
         </div>
       </ContentWrapper>
 
