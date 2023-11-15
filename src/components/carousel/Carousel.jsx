@@ -8,6 +8,7 @@ import ContentWrapper from '../contentWrapper/ContentWrapper';
 import Image from '../lazyLoadImage/Image';
 // 沒有poster替代圖
 import NoPosterPic from '../../assets/no-poster.png';
+import GenresTag from '../genres/GenresTag';
 
 import { useSelector } from 'react-redux';
 import dayjs from 'dayjs';
@@ -58,6 +59,7 @@ function Carousel({ data, loading }) {
                     <Image srcPop={posterUrl} />
                   </div>
                   <div className="textBlock">
+                    <GenresTag data={v.genre_ids} />
                     <span className="title">{v.title}</span>
                     <div className="date">
                       {dayjs(v.release_date).format('YYYY-MM-DD')}

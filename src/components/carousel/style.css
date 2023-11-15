@@ -14,7 +14,7 @@
   font-size: 30px;
   color: white;
   position: absolute;
-  top: 44%;
+  top: 38%;
   transform: translateY(-50%);
   cursor: pointer;
   opacity: 0.5;
@@ -70,7 +70,7 @@
   border-radius: 12px;
   width: 100%;
   aspect-ratio: 1/1.5;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .carousel .loadingSkeleton .skeletonItem .textBlock {
   display: flex;
@@ -122,7 +122,7 @@
   aspect-ratio: 1/1.5;
   background-size: cover;
   background-position: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
