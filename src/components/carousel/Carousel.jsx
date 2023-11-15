@@ -1,29 +1,53 @@
-import React, { useRef } from "react";
-import "./style.scss";
+import React, { useRef } from 'react';
+import './style.scss';
 import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
-} from "react-icons/bs";
-import ContentWrapper from "../contentWrapper/ContentWrapper";
-import Image from "../lazyLoadImage/Image";
+} from 'react-icons/bs';
+import ContentWrapper from '../contentWrapper/ContentWrapper';
+import Image from '../lazyLoadImage/Image';
 // 沒有poster替代圖
-import NoPosterPic from "../../assets/no-poster.png";
+import NoPosterPic from '../../assets/no-poster.png';
 
-import { useSelector } from "react-redux";
-import dayjs from "dayjs";
+import { useSelector } from 'react-redux';
+import dayjs from 'dayjs';
 
 function Carousel({ data, loading }) {
   const { url } = useSelector((state) => state.movie);
   const carouselContainer = useRef();
   //console.log(carouselContainer.current);
+  //訪問所存取的DOM元素
+
+  const scrollDirection = (dir) => {
+    //carouselItems 現在位置
+    const container = carouselContainer.current;
+
+    const scrollAmount =
+      dir === 'left'
+        ? container.scrollLeft - (container.offsetWidth + 20)
+        : container.scrollLeft + (container.offsetWidth + 20);
+
+    container.scrollTo({
+      left: scrollAmount,
+      behavior: 'smooth',
+    });
+    //console.log('12334');
+  };
+
   return (
     <div className="carousel">
       <ContentWrapper>
         <div className="carouselTitle"></div>
-        <BsFillArrowLeftCircleFill className="carouselLeftNav arrow" />
-        <BsFillArrowRightCircleFill className="carouselRightNav arrow" />
+        <BsFillArrowLeftCircleFill
+          className="carouselLeftNav arrow"
+          onClick={() => scrollDirection('left')}
+        />
+        <BsFillArrowRightCircleFill
+          className="carouselRightNav arrow"
+          onClick={() => scrollDirection('right')}
+        />
         {!loading ? (
-          <div className="carouselItems">
+          <div className="carouselItems" ref={carouselContainer}>
             {data?.map((v) => {
               const posterUrl = v.poster_path
                 ? url.poster + v.poster_path
@@ -36,7 +60,7 @@ function Carousel({ data, loading }) {
                   <div className="textBlock">
                     <span className="title">{v.title}</span>
                     <div className="date">
-                      {dayjs(v.release_date).format("YYYY-MM-DD")}
+                      {dayjs(v.release_date).format('YYYY-MM-DD')}
                     </div>
                   </div>
                 </div>
@@ -44,7 +68,7 @@ function Carousel({ data, loading }) {
             })}
           </div>
         ) : (
-          <span>Loading...</span>
+          <div>Loading</div>
         )}
       </ContentWrapper>
     </div>

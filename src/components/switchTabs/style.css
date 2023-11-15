@@ -1,0 +1,31 @@
+.switchingTabs {
+  height: 34px;
+  background-color: white;
+  padding: 2px;
+  border-radius: 20px;
+}
+.switchingTabs .tabsItems {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  position: relative;
+}
+.switchingTabs .tabsItems .tabsItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100%;
+  color: var(--black);
+  font-size: 14px;
+  z-index: 1;
+  cursor: pointer;
+}
+.switchingTabs .movingBg {
+  position: absolute;
+  left: 0;
+  height: 30px;
+  width: 100px;
+  border-radius: 20px;
+  background: var(--gradient);
+}/*# sourceMappingURL=style.css.map */
