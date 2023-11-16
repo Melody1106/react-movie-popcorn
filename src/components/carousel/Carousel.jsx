@@ -11,6 +11,7 @@ import NoPosterPic from '../../assets/no-poster.png';
 import GenresTag from '../genres/GenresTag';
 
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 function Carousel({ data, loading }) {
@@ -18,6 +19,7 @@ function Carousel({ data, loading }) {
   const carouselContainer = useRef();
   //console.log(carouselContainer.current);
   //訪問所存取的DOM元素
+  const navigate = useNavigate();
 
   const scrollDirection = (dir) => {
     //carouselItems 現在位置
@@ -54,7 +56,11 @@ function Carousel({ data, loading }) {
                 ? url.poster + v.poster_path
                 : NoPosterPic;
               return (
-                <div key={v.id} className="carouselItem">
+                <div
+                  key={v.id}
+                  className="carouselItem"
+                  onClick={() => navigate(`/${v.media_type}/${v.id}`)}
+                >
                   <div className="posterBlock">
                     <Image srcPop={posterUrl} />
                   </div>

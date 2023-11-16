@@ -1,0 +1,70 @@
+@import "../../../mixins.scss";
+
+.detailsBanner{
+    width: 100%;
+    padding-top: 100px;
+    background-color: var(--black);
+    
+    @include md{
+        padding-top: 120px;
+    }
+}
+.backdrop-img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+    .lazy-load-image-background {
+        width: 100%;
+        height: 100%;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+}
+.opacity-layer {
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(
+        180deg,
+            rgba(4, 21, 45, 0) 0%,
+            #04152d 79.17%
+    );
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    position: relative;
+
+    @include md {
+        gap: 50px;
+        flex-direction: row;
+    }
+
+
+}
+.left {
+    flex-shrink: 0;
+    .posterImg{
+        width: 100%;
+        display: block;
+        border-radius: 10px;
+        @include md {
+            max-width: 350px;
+        }
+    }
+
+}
+.right {
+    color: white;
+}
