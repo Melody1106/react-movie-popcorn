@@ -9,6 +9,7 @@ import Image from '../../../components/lazyLoadImage/Image';
 // 沒有poster替代圖
 import NoPosterPic from '../../../assets/no-poster.png';
 import ContentWrapper from '../../../components/contentWrapper/ContentWrapper';
+import PlayBtn from '../PlayBtn';
 
 function DetailBanner() {
   const { url } = useSelector((state) => state.movie);
@@ -47,20 +48,37 @@ function DetailBanner() {
                     <div className="subtitle">{data.original_title}</div>
                     <div className="row"></div>
                     <div className="">類型：</div>
-                    <div className="description">{data.overview}</div>
+                    <div className="overview">
+                      <div className="description">{data.overview}</div>
+                    </div>
 
                     <div className="info">
-                      <div className="infoItem">
-                        <span> 資訊</span>
-                        <span></span>
-                      </div>
+                      {data.original_language && (
+                        <div className="infoItem">
+                          <span className="text bold"> 語言:</span>
+                          <span className="text">
+                            {data.original_language}{' '}
+                          </span>
+                        </div>
+                      )}
 
-                      <div className="infoItem">
-                        <span></span>
-                      </div>
-                      <div className="infoItem">
-                        <span></span>
-                      </div>
+                      {data.status && (
+                        <div className="infoItem">
+                          <span className="text"> {data.status}</span>
+                        </div>
+                      )}
+
+                      {data.release_date && (
+                        <div className="infoItem">
+                          <span className="text">{data.release_date}</span>
+                        </div>
+                      )}
+
+                      {data.runtime && (
+                        <div className="infoItem">
+                          <span className="text">{data.runtime} </span>
+                        </div>
+                      )}
                     </div>
                     <div className="info"></div>
                     <div className="info"></div>
