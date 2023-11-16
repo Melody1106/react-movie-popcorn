@@ -59,8 +59,8 @@ function Carousel({ data, loading }) {
                     <Image srcPop={posterUrl} />
                   </div>
                   <div className="textBlock">
-                    <GenresTag data={v.genre_ids} />
-                    <span className="title">{v.title}</span>
+                    <GenresTag data={v.genre_ids.slice(0, 3)} />
+                    <span className="title">{v.title || v.name}</span>
                     <div className="date">
                       {dayjs(v.release_date).format('YYYY-MM-DD')}
                     </div>

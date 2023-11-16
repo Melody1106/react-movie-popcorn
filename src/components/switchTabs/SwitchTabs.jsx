@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import "./style.scss";
+import React, { useState } from 'react';
+import './style.scss';
 function SwitchTabs({ data, onTabToggle }) {
   //選擇的tab 初始值index[0]  index[1]
   const [selectedTab, setSelectedTab] = useState(0);
   //位置 初始值absolute 0
-  const [left, setLeft] = useState(100);
+  const [left, setLeft] = useState(0);
 
   const activeTab = (element, index) => {
     setLeft(index * 100);
