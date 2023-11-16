@@ -1,0 +1,9 @@
+.carouselSection {
+    .contentWrapper {
+        display: flex;
+        flex-direction: column;
+        .carouselTitle {
+            margin-bottom: 20px;
+        }
+    }
+}
