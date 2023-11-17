@@ -11,16 +11,24 @@ import NoPosterPic from '../../../assets/no-poster.png';
 import ContentWrapper from '../../../components/contentWrapper/ContentWrapper';
 import PlayBtn from '../PlayBtn';
 
-function DetailBanner() {
+function DetailBanner({ crew }) {
   const { url } = useSelector((state) => state.movie);
   // console.log(url);
   const { mediaType, id } = useParams();
+  //detail
   //console.log(id, mediaType);
   const { data, loading } = useFetch(`/${mediaType}/${id}?language=zh-TW`);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  //在r=credits api中的crew中找出job為Director的人
+  const director = crew?.filter((f) => f.job === 'Director');
+  //console.log(director);
+  const writer = crew?.filter(
+    (f) => f.job === 'Screenplay' || f.job === 'Writer' || f.job === 'Story',
+  );
+
+  //   useEffect(() => {
+  //     console.log(data);
+  //   }, [data]);
   return (
     <div className="detailsBanner">
       {!loading ? (
@@ -80,8 +88,44 @@ function DetailBanner() {
                         </div>
                       )}
                     </div>
-                    <div className="info"></div>
-                    <div className="info"></div>
+                    {director?.length > 0 && (
+                      <div className="info">
+                        <span className="text bold">導演：</span>
+                        <span className="text">
+                          {director.map((d, i) => (
+                            <span key={i}>{d.name}</span>
+                          ))}
+                        </span>
+                      </div>
+                    )}
+
+                    {writer?.length > 0 && (
+                      <div className="info">
+                        <span className="text bold">編劇：</span>
+                        <span className="text">
+                          {writer.map((w, i) => (
+                            <span key={i}>
+                              {w.name}
+                              {writer.length !== 0 && ','}
+                            </span>
+                          ))}
+                        </span>
+                      </div>
+                    )}
+
+                    {data?.created_by?.length > 0 && (
+                      <div className="info">
+                        <span className="text bold"> Creator</span>
+                        <span className="text">
+                          {data.created_by.map((c, i) => (
+                            <span key={i}>
+                              {c.name}
+                              {data.created_by.length - 1 !== i && ','}
+                            </span>
+                          ))}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </ContentWrapper>
