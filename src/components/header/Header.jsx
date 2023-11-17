@@ -1,18 +1,21 @@
-import "./style.scss";
-import ContentWrapper from "../contentWrapper/ContentWrapper";
-import logo from "../../assets/movix-logo.svg";
+import './style.scss';
+import ContentWrapper from '../contentWrapper/ContentWrapper';
+import logo from '../../assets/movix-logo.svg';
+import { useNavigate } from 'react-router-dom';
 
 //icon 放大鏡
-import { HiOutlineSearch } from "react-icons/hi";
+import { HiOutlineSearch } from 'react-icons/hi';
 // close icon
-import { VscChromeClose } from "react-icons/vsc";
+import { VscChromeClose } from 'react-icons/vsc';
 // burger icon
-import { SlMenu } from "react-icons/sl";
-import { useState } from "react";
+import { SlMenu } from 'react-icons/sl';
+import { useState } from 'react';
 
 function Header() {
+  const navigate = useNavigate();
+
   const [mobileMenu, setMobileMenu] = useState(false);
-  const [showAll, setShowAll] = useState("");
+  const [showAll, setShowAll] = useState('');
   const [showSearch, setShowSearch] = useState(false);
 
   const handleOpenSearch = () => {
@@ -23,10 +26,10 @@ function Header() {
     setMobileMenu(true);
   };
   return (
-    <header className={`header ${mobileMenu ? "mobileView" : ""} ${showAll}`}>
+    <header className={`header ${mobileMenu ? 'mobileView' : ''} ${showAll}`}>
       <ContentWrapper>
         <div className="navContainer">
-          <div className="logo">
+          <div className="logo" onClick={() => navigate('/')}>
             <img src={logo} alt="logo" />
           </div>
           <ul className="menuItems">
