@@ -12,7 +12,7 @@ function Cast({ data, loading }) {
 
   return (
     <div className="castSection">
-      <div className="sectionHeading">Top Cast</div>
+      <div className="sectionHeading">《 演出陣容 》</div>
       <ContentWrapper>
         {!loading ? (
           <div className="listItems">

@@ -6,6 +6,8 @@ import useFetch from '../../hooks/useFetch';
 
 import DetailBanner from './detailsBanner/DetailBanner';
 import Cast from './cast/Cast';
+import Similar from './carousels/Similar';
+import Recommendations from './carousels/Recommendations';
 
 function Details() {
   const { mediaType, id } = useParams();
@@ -26,6 +28,8 @@ function Details() {
       {/* <DetailBanner video={DataTransfer.results[0]} /> */}
       <DetailBanner crew={credits?.crew} />
       <Cast data={credits?.cast} loading={creditLoading} />
+      <Similar mediaType={mediaType} id={id} />
+      <Recommendations mediaType={mediaType} id={id} />
     </div>
   );
 }
