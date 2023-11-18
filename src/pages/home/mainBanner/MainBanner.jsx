@@ -48,7 +48,11 @@ function MainBanner() {
       <div className="opacity-layer"></div>
       <ContentWrapper>
         <div className="mainBannerContent">
-          <span className="title">Welcome</span>
+          <span className="title">
+            隨時打開新的我
+            <br />
+            豈止經典 精彩上線
+          </span>
           <span className="subTitle">
             Open a new me at any time. <br />
             More than just classics, exciting new releases
@@ -59,7 +63,7 @@ function MainBanner() {
               onChange={(e) => setQuery(e.target.value)}
               onKeyUp={handleQuery}
               type="text"
-              placeholder="Search for a movie or tv show"
+              placeholder="輸入關鍵字尋找戲劇電影"
             />
             <button onClick={handleClickQuery}>搜尋</button>
           </div>
