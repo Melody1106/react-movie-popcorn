@@ -9,6 +9,7 @@ import Image from '../../../components/lazyLoadImage/Image';
 // 沒有poster替代圖
 import NoPosterPic from '../../../assets/no-poster.png';
 import ContentWrapper from '../../../components/contentWrapper/ContentWrapper';
+import CircleRating from '../../../components/circleRating/CircleRating';
 import PlayBtn from '../PlayBtn';
 
 function DetailBanner({ crew }) {
@@ -54,7 +55,12 @@ function DetailBanner({ crew }) {
                   <div className="right">
                     <div className="title">{data.title || data.name}</div>
                     <div className="subtitle">{data.original_title}</div>
-                    <div className="row"></div>
+                    <div className="row">
+                      <CircleRating />
+                      <div>
+                        <PlayBtn />
+                      </div>
+                    </div>
                     <div className="">類型：</div>
                     <div className="overview">
                       <div className="description">{data.overview}</div>

@@ -1,0 +1,8 @@
+@import "../../mixins.scss";
+
+.circleRating{
+width: 75px;
+@include md{
+    width: 85px;
+}
+}

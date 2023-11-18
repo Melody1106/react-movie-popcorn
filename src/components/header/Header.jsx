@@ -66,6 +66,7 @@ function Header() {
   const searchQueryHandler = (e) => {
     if (e.key === 'Enter' && query.length > 0) {
       navigate(`/search/${query}`);
+      setQuery('');
       //1秒後關閉搜尋欄
       setTimeout(() => {
         setShowSearch(false);
@@ -87,21 +88,29 @@ function Header() {
       className={`header ${mobileMenu ? 'mobileView' : ''} ${showNavCss}`}
     >
       <ContentWrapper>
-        <div className="navContainer">
+        <div className="navBetween ">
           <div className="logo" onClick={() => navigate('/')}>
             <img src={logo} alt="logo" />
           </div>
-          <ul className="menuItems">
-            <li className="menuItem" onClick={() => navigationMovieHandler()}>
-              電影
-            </li>
-            <li className="menuItem" onClick={() => navigationTvHandler()}>
-              戲劇
-            </li>
-            <li className="menuItem">
-              <HiOutlineSearch onClick={handleOpenSearch} />
-            </li>
-          </ul>
+          <div>
+            <ul className="menuItems">
+              <li className="menuItem wrap">
+                {/* <HiOutlineSearch onClick={handleOpenSearch} /> */}
+                <input
+                  type="text"
+                  onChange={(e) => setQuery(e.target.value)}
+                  onKeyUp={searchQueryHandler}
+                />
+                <HiOutlineSearch />
+              </li>
+              <li className="menuItem" onClick={() => navigationMovieHandler()}>
+                電影
+              </li>
+              <li className="menuItem" onClick={() => navigationTvHandler()}>
+                戲劇
+              </li>
+            </ul>
+          </div>
         </div>
         {/* 手機版menu */}
         <div className="mobileMenuItems">
@@ -120,7 +129,7 @@ function Header() {
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyUp={searchQueryHandler}
               />
-              <VscChromeClose onClick={() => setShowSearch(false)} />
+              {/* <VscChromeClose onClick={() => setShowSearch(false)} /> */}
             </div>
           </ContentWrapper>
         </div>

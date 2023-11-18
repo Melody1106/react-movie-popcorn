@@ -50,7 +50,7 @@ function Explore() {
   const fetchNextPageData = () => {
     // `/discover/${mediaType}&language=zh-TW&page=${pageNum}&sort_by=popularity.desc`,
     fetchDataFromApi(
-      `/discover/${mediaType}?page=${pageNum}?language=zh-TW`,
+      `/discover/${mediaType}?page=${pageNum}&language=zh-TW`,
     ).then((res) => {
       if (data?.results) {
         setData({ ...data, results: [...data.results, ...res.results] });
