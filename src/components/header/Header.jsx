@@ -1,7 +1,7 @@
 import './style.scss';
 import ContentWrapper from '../contentWrapper/ContentWrapper';
 import logo from '../../assets/movix-logo.svg';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 //icon 放大鏡
 import { HiOutlineSearch } from 'react-icons/hi';
@@ -9,15 +9,51 @@ import { HiOutlineSearch } from 'react-icons/hi';
 import { VscChromeClose } from 'react-icons/vsc';
 // burger icon
 import { SlMenu } from 'react-icons/sl';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [mobileMenu, setMobileMenu] = useState(false);
-  const [showAll, setShowAll] = useState('');
+  // const [showAll, setShowAll] = useState('');
   const [showSearch, setShowSearch] = useState(false);
   const [query, setQuery] = useState('');
+  //設置最後scrollY的狀態
+  const [lastscrollY, setLastScrollY] = useState(0);
+  //設置navbar的 css 狀態 會有 top & hide
+  const [showNavCss, setShowNavCss] = useState('top');
+
+  //當路由location改變時，這個useEffect會被觸發
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    //將視窗的滾動位置移動到 (0, 0) 的坐標，即頁面的頂部
+  }, [location]);
+
+  const controlNavbarHight = () => {
+    //如果視窗的滾動位置大於200，設置hide樣式
+    if (window.scrollY > 200) {
+      if (window.scrollY > lastscrollY) {
+        //如果視窗的滾動位置大於最後scrollY的狀態(一直下滑)，設置hide樣式
+        setShowNavCss('hide');
+      } else {
+        setShowNavCss('show');
+      }
+    } else {
+      setShowNavCss('top');
+    }
+
+    //更新最後scrollY的狀態
+    setLastScrollY(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', controlNavbarHight);
+    //返回一個清理函數是為了確保在組件卸載或 useEffect 依賴發生變化時，清理掉之前設置的效果或資源，從而確保代碼的正確性和效能。
+    return () => {
+      window.removeEventListener('scroll', controlNavbarHight);
+    };
+  }, [lastscrollY]);
 
   const handleOpenSearch = () => {
     setShowSearch(true);
@@ -47,7 +83,9 @@ function Header() {
     setMobileMenu(false);
   };
   return (
-    <header className={`header ${mobileMenu ? 'mobileView' : ''} ${showAll}`}>
+    <header
+      className={`header ${mobileMenu ? 'mobileView' : ''} ${showNavCss}`}
+    >
       <ContentWrapper>
         <div className="navContainer">
           <div className="logo" onClick={() => navigate('/')}>
