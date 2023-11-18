@@ -57,11 +57,11 @@ function Search() {
         {!loading && data?.results.length > 0 ? (
           <>
             <div className="pageTitle">
-              {' '}
               {`${query} 搜尋結果: ${data.total_results}`}
             </div>
 
             <InfiniteScroll
+              className="content"
               dataLength={data?.results.length}
               next={fetchNextPageData}
               hasMore={data?.total_pages > pageNum}

@@ -73,6 +73,7 @@ function Explore() {
             {/* loding animation  */}
             {data?.results?.length > 0 ? (
               <InfiniteScroll
+                className="content"
                 dataLength={data?.results.length}
                 next={fetchNextPageData}
                 hasMore={data?.total_pages > pageNum}
