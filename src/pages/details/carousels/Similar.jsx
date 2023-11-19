@@ -15,7 +15,11 @@ function Similar({ mediaType, id }) {
   return (
     <div>
       <div className="title-about">相關影片</div>
-      <Carousel data={data?.results} loading={loading} />
+      <Carousel
+        data={data?.results}
+        loading={loading}
+        mediaCategory={mediaType}
+      />
     </div>
   );
 }

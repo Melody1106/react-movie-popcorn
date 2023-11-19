@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 
-function Carousel({ data, loading }) {
+function Carousel({ data, loading, mediaCategory }) {
   const { url } = useSelector((state) => state.movie);
   const carouselContainer = useRef();
   //console.log(carouselContainer.current);
@@ -59,7 +59,9 @@ function Carousel({ data, loading }) {
                 <div
                   key={v.id}
                   className="carouselItem"
-                  onClick={() => navigate(`/${v.media_type}/${v.id}`)}
+                  onClick={() =>
+                    navigate(`/${v.media_type || mediaCategory}/${v.id}`)
+                  }
                 >
                   <div className="posterBlock">
                     <Image srcPop={posterUrl} />

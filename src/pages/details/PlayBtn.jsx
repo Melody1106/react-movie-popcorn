@@ -1,6 +1,4 @@
-import React from 'react';
-
-function PlayBtn() {
+export const PlayIcon = () => {
   return (
     <svg
       version="1.1"
@@ -36,6 +34,4 @@ function PlayBtn() {
       ></circle>
     </svg>
   );
-}
-
-export default PlayBtn;
+};

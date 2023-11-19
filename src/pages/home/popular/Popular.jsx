@@ -9,11 +9,13 @@ import SwitchTabs from '../../../components/switchTabs/SwitchTabs';
 import Carousel from '../../../components/carousel/Carousel';
 
 function Popular() {
-  const [popularType, setPopularType] = useState('tv');
+  const [mediaCategory, setMediaCategory] = useState('tv');
 
-  const { data, loading } = useFetch(`/${popularType}/popular?language=zh-TW`);
+  const { data, loading } = useFetch(
+    `/${mediaCategory}/popular?language=zh-TW`,
+  );
   const onTabToggle = (tab) => {
-    setPopularType(tab === '戲劇' ? 'tv' : 'movie');
+    setMediaCategory(tab === '戲劇' ? 'tv' : 'movie');
   };
 
   useEffect(() => {
@@ -25,7 +27,11 @@ function Popular() {
         <div className="carouselTitle">Popular</div>
         <SwitchTabs data={['戲劇', '電影']} onTabToggle={onTabToggle} />
       </ContentWrapper>
-      <Carousel data={data ? data.results : null} loading={loading} />
+      <Carousel
+        data={data ? data.results : null}
+        loading={loading}
+        mediaCategory={mediaCategory}
+      />
     </div>
   );
 }

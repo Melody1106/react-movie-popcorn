@@ -10,7 +10,7 @@ import Image from '../../../components/lazyLoadImage/Image';
 import NoPosterPic from '../../../assets/no-poster.png';
 import ContentWrapper from '../../../components/contentWrapper/ContentWrapper';
 import CircleRating from '../../../components/circleRating/CircleRating';
-import PlayBtn from '../PlayBtn';
+import { PlayIcon } from '../playBtn';
 
 function DetailBanner({ crew }) {
   const { url } = useSelector((state) => state.movie);
@@ -57,8 +57,9 @@ function DetailBanner({ crew }) {
                     <div className="subtitle">{data.original_title}</div>
                     <div className="row">
                       <CircleRating />
-                      <div>
-                        <PlayBtn />
+                      <div className="playbtn">
+                        <PlayIcon />
+                        <span className="text">Watch Trailer</span>
                       </div>
                     </div>
                     <div className="">類型：</div>

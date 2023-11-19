@@ -9,11 +9,13 @@ import SwitchTabs from '../../../components/switchTabs/SwitchTabs';
 import Carousel from '../../../components/carousel/Carousel';
 
 function Rating() {
-  const [ratingType, setRatingType] = useState('tv');
+  const [mediaCategory, setMediaCategory] = useState('tv');
 
-  const { data, loading } = useFetch(`/${ratingType}/top_rated?language=zh-TW`);
+  const { data, loading } = useFetch(
+    `/${mediaCategory}/top_rated?language=zh-TW`,
+  );
   const onTabToggle = (tab) => {
-    setRatingType(tab === '戲劇' ? 'tv' : 'movie');
+    setMediaCategory(tab === '戲劇' ? 'tv' : 'movie');
   };
 
   useEffect(() => {
@@ -25,7 +27,11 @@ function Rating() {
         <div className="carouselTitle">Rating</div>
         <SwitchTabs data={['戲劇', '電影']} onTabToggle={onTabToggle} />
       </ContentWrapper>
-      <Carousel data={data ? data.results : null} loading={loading} />
+      <Carousel
+        data={data ? data.results : null}
+        loading={loading}
+        mediaCategory={mediaCategory}
+      />
     </div>
   );
 }

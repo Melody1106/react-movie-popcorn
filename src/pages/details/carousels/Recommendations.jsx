@@ -11,7 +11,11 @@ function Recommendations({ mediaType, id }) {
   return (
     <div>
       <div className="title-about">推薦內容</div>
-      <Carousel data={data?.results} loading={loading} />
+      <Carousel
+        data={data?.results}
+        loading={loading}
+        mediaCategory={mediaType}
+      />
     </div>
   );
 }
