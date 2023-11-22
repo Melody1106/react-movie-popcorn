@@ -8,6 +8,7 @@ import DetailBanner from './detailsBanner/DetailBanner';
 import Cast from './cast/Cast';
 import Similar from './carousels/Similar';
 import Recommendations from './carousels/Recommendations';
+import VideoSection from './videoSection/VideoSection';
 
 function Details() {
   const { mediaType, id } = useParams();
@@ -28,6 +29,7 @@ function Details() {
       {/* <DetailBanner video={DataTransfer.results[0]} /> */}
       <DetailBanner crew={credits?.crew} />
       <Cast data={credits?.cast} loading={creditLoading} />
+      <VideoSection data={data} loading={loading} />
       <Similar mediaType={mediaType} id={id} />
       <Recommendations mediaType={mediaType} id={id} />
     </div>

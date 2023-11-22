@@ -1,0 +1,60 @@
+@import "../../../mixins.scss";
+
+.videoSection{
+    .sectionHeading{
+        font-size: 24px;
+        color: white;
+        margin-bottom: 20px;
+    }
+    .videos{
+        display: flex;
+        gap: 10px;
+    }
+    .videoItem{
+        width: 150px;
+        flex-shrink: 0;
+        position: relative;
+        @include md{
+            width: 25%;
+        }
+        .videoThumbnail{
+            margin-bottom: 10px;
+         
+            img{
+                width: 100%;
+                display: block;
+            }
+            svg{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+        
+                width: 50px;
+                height: 50px;
+            }
+            .triangle {
+                stroke-dasharray: 240;
+                stroke-dashoffset: 480;
+                stroke: white;
+               
+                transition: all 0.7s ease-in-out;
+            }
+            .circle {
+                stroke: white;
+                stroke-dasharray: 650;
+                stroke-dashoffset: 1300;
+                transition: all 0.5s ease-in-out;
+            }
+        }
+        .videoTitle {
+            color: white;
+            font-size: 14px;
+            line-height: 20px;
+            @include md {
+                font-size: 16px;
+                line-height: 24px;
+            }
+        }
+    }
+}
