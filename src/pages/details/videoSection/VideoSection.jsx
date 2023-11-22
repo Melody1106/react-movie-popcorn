@@ -8,6 +8,7 @@ import { PlayIcon } from '../playBtn';
 import VideoPop from '../../../components/videoPop/VideoPop';
 
 function VideoSection({ data, loading }) {
+  //控制影片彈窗 關閉/開啟
   const [show, setShow] = useState(false);
   const [videoId, setVideoId] = useState(null);
 
@@ -18,7 +19,14 @@ function VideoSection({ data, loading }) {
         {!loading ? (
           <div className="videos">
             {data?.results?.map((v) => (
-              <div className="videoItem" key={v.id}>
+              <div
+                className="videoItem"
+                key={v.id}
+                onClick={() => {
+                  setShow(true);
+                  setVideoId(v.key);
+                }}
+              >
                 <div className="videoThumbnail">
                   <Image
                     srcPop={`https://img.youtube.com/vi/${v.key}/mqdefault.jpg`}
@@ -33,7 +41,12 @@ function VideoSection({ data, loading }) {
           <div>Loading...</div>
         )}
       </ContentWrapper>
-      <VideoPop />
+      <VideoPop
+        show={show}
+        setShow={setShow}
+        videoId={videoId}
+        setVideoId={setVideoId}
+      />
     </div>
   );
 }
