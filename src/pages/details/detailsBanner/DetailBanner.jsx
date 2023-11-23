@@ -10,7 +10,7 @@ import Image from '../../../components/lazyLoadImage/Image';
 import NoPosterPic from '../../../assets/no-poster.png';
 import ContentWrapper from '../../../components/contentWrapper/ContentWrapper';
 import CircleRating from '../../../components/circleRating/CircleRating';
-import { PlayIcon } from '../playBtn';
+import { PlayIcon } from '../../../pages/details/PlayBtn';
 
 function DetailBanner({ crew }) {
   const { url } = useSelector((state) => state.movie);
