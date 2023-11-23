@@ -62,7 +62,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter basename="/popCorn">
+    <BrowserRouter>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
