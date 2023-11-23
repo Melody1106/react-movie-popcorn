@@ -4,10 +4,10 @@ import 'react-circular-progressbar/dist/styles.css';
 
 import './style.scss';
 
-function CircleRating() {
+function CircleRating({ rating }) {
   return (
     <div className="circleRating">
-      <CircularProgressbar value={60} text={`$60%`} />
+      <CircularProgressbar value={rating} text={rating} />
     </div>
   );
 }

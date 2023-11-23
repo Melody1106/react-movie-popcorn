@@ -56,7 +56,9 @@ function DetailBanner({ crew }) {
                     <div className="title">{data.title || data.name}</div>
                     <div className="subtitle">{data.original_title}</div>
                     <div className="row">
-                      <CircleRating />
+                      <CircleRating
+                        rating={data.vote_average.toFixed(1) * 10}
+                      />
                       <div className="playbtn">
                         <PlayIcon />
                         <span className="text">Watch Trailer</span>
