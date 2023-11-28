@@ -11,6 +11,7 @@ import NoPosterPic from '../../../assets/no-poster.png';
 import ContentWrapper from '../../../components/contentWrapper/ContentWrapper';
 import CircleRating from '../../../components/circleRating/CircleRating';
 import { PlayIcon } from '../../../pages/details/PlayBtn';
+import GenresTag from '../../../components/genres/GenresTag';
 
 function DetailBanner({ crew }) {
   const { url } = useSelector((state) => state.movie);
@@ -26,6 +27,14 @@ function DetailBanner({ crew }) {
   const writer = crew?.filter(
     (f) => f.job === 'Screenplay' || f.job === 'Writer' || f.job === 'Story',
   );
+
+  const toHourAndMin = function (time) {
+    const hours = Math.floor(time / 60);
+    const mins = time % 60;
+    return `${hours}h ${mins}m`;
+  };
+
+  const genreData = data?.genres?.map((g) => g.id);
 
   //   useEffect(() => {
   //     console.log(data);
@@ -65,6 +74,7 @@ function DetailBanner({ crew }) {
                       </div>
                     </div>
                     <div className="">類型：</div>
+                    <GenresTag data={genreData} />
                     <div className="overview">
                       <div className="description">{data.overview}</div>
                     </div>
@@ -72,9 +82,9 @@ function DetailBanner({ crew }) {
                     <div className="info">
                       {data.original_language && (
                         <div className="infoItem">
-                          <span className="text bold"> 語言:</span>
+                          {/* <span className="text bold"> 語言:</span> */}
                           <span className="text">
-                            {data.original_language}{' '}
+                            {data.original_language.toUpperCase()}
                           </span>
                         </div>
                       )}
@@ -93,7 +103,9 @@ function DetailBanner({ crew }) {
 
                       {data.runtime && (
                         <div className="infoItem">
-                          <span className="text">{data.runtime} </span>
+                          <span className="text">
+                            {toHourAndMin(data.runtime)}{' '}
+                          </span>
                         </div>
                       )}
                     </div>
