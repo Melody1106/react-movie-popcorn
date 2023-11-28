@@ -13,7 +13,7 @@ function VideoPop({ show, setShow, videoId, setVideoId }) {
       <div className="opacityLayer">
         <div className="videoPlayer">
           <span className="closeBtn" onClick={handleVideoPop}>
-            close
+            CLOSE
           </span>
           <ReactPlayer
             url={`https://www.youtube.com/watch?v=${videoId}`}

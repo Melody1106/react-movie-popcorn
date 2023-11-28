@@ -15,7 +15,10 @@ function VideoSection({ data, loading }) {
   return (
     <div className="videoSection">
       <ContentWrapper>
-        <div className="sectionHeading">《預告影片》</div>
+        {/* {data?.results?.lenhth < 0 && (
+          <div className="sectionHeading">《預告影片》</div>
+        )} */}
+
         {!loading ? (
           <div className="videos">
             {data?.results?.map((v) => (

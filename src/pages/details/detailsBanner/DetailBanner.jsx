@@ -73,9 +73,14 @@ function DetailBanner({ crew }) {
                         <span className="text">Watch Trailer</span>
                       </div>
                     </div>
-                    <div className="">類型：</div>
-                    <GenresTag data={genreData} />
+                    <div className="row">
+                      <div className="">類型：</div>
+                      <GenresTag data={genreData} />
+                    </div>
+
                     <div className="overview">
+                      {data.overview && <div className="">劇情：</div>}
+
                       <div className="description">{data.overview}</div>
                     </div>
 
