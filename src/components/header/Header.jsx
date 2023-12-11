@@ -114,9 +114,11 @@ function Header() {
         </div>
         {/* 手機版menu */}
         <div className="mobileMenuItems">
-          <HiOutlineSearch />
-          <VscChromeClose onClick={() => setMobileMenu(false)} />
-          <SlMenu onClick={handleOpemMobileMenu} />
+          {mobileMenu ? (
+            <VscChromeClose onClick={() => setMobileMenu(false)} />
+          ) : (
+            <SlMenu onClick={handleOpemMobileMenu} />
+          )}
         </div>
       </ContentWrapper>
 
