@@ -8,19 +8,20 @@ import MovieCard from '../../components/movieCard/MovieCard';
 
 import { useParams } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Select from 'react-select';
 
 //排序
 const sortByData = [
-  { value: 'popularity.desc', label: 'popularity Descending' },
-  { value: 'popularity.asc', label: 'popularity Ascending' },
-  { value: 'vote_average.desc', label: 'Rating Descending' },
-  { value: 'vote_average.asc', label: 'Rating Ascending' },
+  { value: 'popularity.desc', label: '受歡迎降冪排列' },
+  { value: 'popularity.asc', label: '受歡迎升冪排列' },
+  { value: 'vote_average.desc', label: '評分降冪排列' },
+  { value: 'vote_average.asc', label: '評分升冪排列' },
   {
     value: 'primary_release_date.desc',
-    label: 'Release Date Descending',
+    label: '發行日期降冪排列',
   },
-  { value: 'primary_release_date.asc', label: 'Release Date Ascending' },
-  { value: 'original_title.asc', label: 'Title (a-z)' },
+  { value: 'primary_release_date.asc', label: '發行日期降冪排列' },
+  { value: 'original_title.asc', label: '名稱排列 (a-z)' },
 ];
 
 function Explore() {
@@ -30,11 +31,18 @@ function Explore() {
   const { mediaType } = useParams();
   const [pageNum, setPageNum] = useState(1);
   const [sortby, setSortby] = useState(null);
+  const [genre, setGenre] = useState(null);
 
-  // 連接api
+  const { data: getGenres } = useFetch(`/genre/${mediaType}/list`);
+
+  console.log('genreApi', getGenres);
+
+  let filters = {};
+
+  // 連接explore api
   const fetchInitialData = () => {
     setLoading(true);
-    fetchDataFromApi(`/discover/${mediaType}?language=zh-TW`)
+    fetchDataFromApi(`/discover/${mediaType}?language=zh-TW`, filters)
       .then((res) => {
         setData(res);
         setPageNum((pre) => pre + 1);
@@ -51,6 +59,7 @@ function Explore() {
     // `/discover/${mediaType}&language=zh-TW&page=${pageNum}&sort_by=popularity.desc`,
     fetchDataFromApi(
       `/discover/${mediaType}?page=${pageNum}&language=zh-TW`,
+      filters,
     ).then((res) => {
       if (data?.results) {
         setData({ ...data, results: [...data.results, ...res.results] });
@@ -62,12 +71,64 @@ function Explore() {
   };
 
   useEffect(() => {
+    filters = {};
     fetchInitialData();
   }, [mediaType]);
+
+  const onChange = (selectItems, action) => {
+    if (action.name === 'sortby') {
+      setSortby(selectItems);
+      if (action.action !== 'clear') {
+        filters.sort_by = selectItems.value;
+      } else {
+        delete filters.sort_by;
+      }
+    }
+
+    if (action.name === 'genres') {
+      setGenre(selectItems);
+      if (action.action !== 'clear') {
+        let genreId = selectItems.map((g) => g.id);
+        genreId = JSON.stringify(genreId).slice(1, -1);
+        filters.with_genres = genreId;
+      } else {
+        delete filters.with_genres;
+      }
+    }
+
+    setPageNum(1);
+    fetchInitialData();
+  };
 
   return (
     <div className="explorePage">
       <ContentWrapper>
+        <div className="pageHeader">
+          <div className="pageTitle">探索</div>
+          <div className="filters">
+            <Select
+              isMulti
+              name="genres"
+              value={genre}
+              closeMenuOnSelect={false}
+              options={getGenres?.genres}
+              getOptionLabel={(option) => option.name}
+              getOptionValue={(option) => option.id}
+              onChange={onChange}
+              placeholder="分類篩選"
+              className="react-select-container genresDD"
+              classNamePrefix="react-select"
+            />
+            <Select
+              value={sortby}
+              options={sortByData}
+              name="sortby"
+              className="react-select-container sortbyDD"
+              classNamePrefix="react-select"
+              placeholder="排序"
+            />
+          </div>
+        </div>
         {!loading && (
           <>
             {/* loding animation  */}
